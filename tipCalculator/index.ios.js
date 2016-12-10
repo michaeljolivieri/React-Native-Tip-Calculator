@@ -22,6 +22,9 @@ export default class tipCalculator extends Component {
     
     calculateTip(value) {
         console.log(value);
+        this.state.amountTotal = value;
+        this.state.tipTotal = value * this.state.tipPercentage;
+        this.setState(this.state);
     }
     
     render() {
@@ -32,13 +35,13 @@ export default class tipCalculator extends Component {
             </Text>
             <TextInput 
                 style={styles.textInput}
-                onChangeText-{this.calculateTip}>
+                onChangeText={this.calculateTip.bind(this)}>
             </TextInput>
             <Text>
                 Total Tip:
             </Text>
             <Text style={styles.amount}>
-                $10
+                ${this.state.tipTotal.toFixed(2)}
             </Text>
           </View>
         );
