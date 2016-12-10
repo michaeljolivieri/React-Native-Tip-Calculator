@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  Slider
 } from 'react-native';
 
 export default class tipCalculator extends Component {
@@ -18,6 +19,8 @@ export default class tipCalculator extends Component {
         amountTotal: 0,
         tipPercentage: 0.15,
         tipTotal: 0
+        split: 1
+        amountPerPerson: 0
     };
     
     calculateTip(value) {
@@ -26,6 +29,7 @@ export default class tipCalculator extends Component {
         this.state.tipTotal = value * this.state.tipPercentage;
         this.setState(this.state);
     }
+    
     
     render() {
         return (
@@ -37,6 +41,19 @@ export default class tipCalculator extends Component {
                 style={styles.textInput}
                 onChangeText={this.calculateTip.bind(this)}>
             </TextInput>
+            <View>
+                <Text>
+                    Split Amongst {this.state.split}:
+                </Text>
+                <Slider 
+                    maximumValue={10}
+                    minimumValue={1}
+                    step={1}
+                    value={this.state.split}
+                    style={styles.slider}
+                    onValueChange={this.splitBill.bind(this)}
+                />
+            </View>
             <Text>
                 Total Tip:
             </Text>
@@ -49,24 +66,29 @@ export default class tipCalculator extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  textInput: {
-    textAlign: 'left',
-    color: '#333333',
-    margin: 5,
-    height: 50,
-    borderColor: '#60b7e2',
-    borderWidth: 1  
-  },
-  amount: {
-    fontWeight: 'bold',
-    textAlign: 'left'
-  }
+      container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+      },
+      textInput: {
+        textAlign: 'left',
+        color: '#333333',
+        margin: 5,
+        height: 50,
+        borderColor: '#60b7e2',
+        borderWidth: 1  
+      },
+      amount: {
+        fontWeight: 'bold',
+        textAlign: 'left'
+      },
+      slider: {
+        margin: 5,
+        height: 40
+      }
+
     
 });
 
