@@ -14,18 +14,35 @@ import {
 } from 'react-native';
 
 export default class tipCalculator extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>
-         Amount Total:
-        </Text>
-        <TextInput style={styles.textInput}>
-        
-        </TextInput>
-      </View>
-    );
-  }
+    state = {
+        amountTotal: 0,
+        tipPercentage: 0.15,
+        tipTotal: 0
+    };
+    
+    calculateTip(value) {
+        console.log(value);
+    }
+    
+    render() {
+        return (
+          <View style={styles.container}>
+            <Text>
+                Amount Total:
+            </Text>
+            <TextInput 
+                style={styles.textInput}
+                onChangeText-{this.calculateTip}>
+            </TextInput>
+            <Text>
+                Total Tip:
+            </Text>
+            <Text style={styles.amount}>
+                $10
+            </Text>
+          </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -42,7 +59,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: '#60b7e2',
     borderWidth: 1  
+  },
+  amount: {
+    fontWeight: 'bold',
+    textAlign: 'left'
   }
+    
 });
 
 AppRegistry.registerComponent('tipCalculator', () => tipCalculator);
