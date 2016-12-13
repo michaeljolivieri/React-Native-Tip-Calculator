@@ -18,18 +18,26 @@ export default class tipCalculator extends Component {
     state = {
         amountTotal: 0,
         tipPercentage: 0.15,
-        tipTotal: 0
-        split: 1
+        tipTotal: 0,
+        split: 1,
         amountPerPerson: 0
     };
     
     calculateTip(value) {
-        console.log(value);
-        this.state.amountTotal = value;
+        //console.log(value);
+        this.state.amountTotal = parseInt(value);
         this.state.tipTotal = value * this.state.tipPercentage;
         this.setState(this.state);
+        this.splitBill(this.state.split);
     }
     
+    splitBill(value) {
+        //debugger;
+        console.log("splitBill", value);
+        this.state.split = value;
+        this.state.amountPerPerson = ((this.state.amountTotal + this.state.tipTotal)/value).toFixed(2);
+        this.setState(this.state);
+    }
     
     render() {
         return (
@@ -54,6 +62,14 @@ export default class tipCalculator extends Component {
                     onValueChange={this.splitBill.bind(this)}
                 />
             </View>
+            
+            <Text>
+                Amount Per Person:
+            </Text>
+            <Text style={styles.amount}>
+                ${this.state.amountPerPerson}
+            </Text>
+            
             <Text>
                 Total Tip:
             </Text>
