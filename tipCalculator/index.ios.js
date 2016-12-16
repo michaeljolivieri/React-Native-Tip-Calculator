@@ -42,15 +42,18 @@ export default class tipCalculator extends Component {
     render() {
         return (
           <View style={styles.container}>
-            <Text>
-                Amount Total:
-            </Text>
-            <TextInput 
-                style={styles.textInput}
-                onChangeText={this.calculateTip.bind(this)}>
-            </TextInput>
-            <View>
-                <Text>
+            <View style={styles.row}>
+                <Text style={styles.label}>
+                    Amount Total:
+                </Text>
+                <TextInput 
+                    style={styles.textInput}
+                    onChangeText={this.calculateTip.bind(this)}>
+                </TextInput>
+            </View>
+            
+            <View style={styles.row}>
+                <Text style={styles.label}>
                     Split Amongst {this.state.split}:
                 </Text>
                 <Slider 
@@ -63,19 +66,23 @@ export default class tipCalculator extends Component {
                 />
             </View>
             
-            <Text>
-                Amount Per Person:
-            </Text>
-            <Text style={styles.amount}>
-                ${this.state.amountPerPerson}
-            </Text>
+            <View style={styles.row}>
+                <Text style={styles.label}>
+                    Amount Per Person:
+                </Text>
+                <Text style={styles.amount}>
+                    ${this.state.amountPerPerson}
+                </Text>
+            </View>
             
-            <Text>
-                Total Tip:
-            </Text>
-            <Text style={styles.amount}>
-                ${this.state.tipTotal.toFixed(2)}
-            </Text>
+            <View style={styles.row}>
+                <Text style={styles.label}>
+                    Total Tip:
+                </Text>
+                <Text style={styles.amount}>
+                    ${this.state.tipTotal.toFixed(2)}
+                </Text>
+            </View>
           </View>
         );
     }
@@ -84,9 +91,15 @@ export default class tipCalculator extends Component {
 const styles = StyleSheet.create({
       container: {
         flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#F5FCFF'
+      },
+      row: {
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 50
       },
       textInput: {
         textAlign: 'left',
@@ -94,16 +107,25 @@ const styles = StyleSheet.create({
         margin: 5,
         height: 50,
         borderColor: '#60b7e2',
-        borderWidth: 1  
+        borderWidth: 1,
+        flex: 2
       },
       amount: {
         fontWeight: 'bold',
-        textAlign: 'left'
+        textAlign: 'left',
+        flex: 2
       },
       slider: {
         margin: 5,
-        height: 40
-      }
+        height: 40,
+        flex: 2
+    },
+    label: {
+        textAlign: 'right',
+        margin: 10,
+        flex: 1,
+        color: "#60b7e2"
+    }
 
     
 });
