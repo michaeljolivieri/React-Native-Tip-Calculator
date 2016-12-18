@@ -13,6 +13,7 @@ import {
   View,
   Slider
 } from 'react-native';
+import TipSelector from './tip-selector';
 
 export default class tipCalculator extends Component {
     state = {
@@ -51,6 +52,8 @@ export default class tipCalculator extends Component {
                     onChangeText={this.calculateTip.bind(this)}>
                 </TextInput>
             </View>
+            
+            <TipSelector style={styles.row} />
             
             <View style={styles.row}>
                 <Text style={styles.label}>
