@@ -10,23 +10,30 @@ import {
 class TipSelector extends Component {
     state = {
         values: ['OK 15%', 'Good 18%', 'Great 20%', 'Wow 25%'],
+        percentages: [0.15, 0.18, 0.2, 0.25],
         selectedIndex: 0
     }
     
-    render () {
-        return (
-            <View>
-            <SegmentedControlIOS
-            values={['OK 15%', 'Good 18%', 'Great 20%', 'Wow 25%']}
-            selectedIndex={this.state.selectedIndex}
-            onChange={(event) => {
-                this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
-            }}
-            tintColor={"#60b7e2"}
-            style={styles.segmentedControl}
-            />
-            </View>
-        )
+static PropTypes = {
+    selectionChanged: React.PropTypes.func.isRequired
+}    
+    
+render () {
+    return (
+        <View>
+        <SegmentedControlIOS
+        values={this.state.values}
+        selectedIndex={this.state.selectedIndex}
+        onChange={(event) => {
+            var _selectedIndex = event.nativeEvent.selectedSegmentIndex;
+            this.setState({selectedIndex: _selectedIndex});
+            this.props.selectionChanged(this.state.percentages[_selectedIndex]);
+        }}
+        tintColor={"#60b7e2"}
+        style={styles.segmentedControl}
+        />
+        </View>
+    )
     }
     
 }

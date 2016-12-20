@@ -40,6 +40,13 @@ export default class tipCalculator extends Component {
         this.setState(this.state);
     }
     
+    updateTipPercentage(value) {
+        console.log("updateTipPercentage", value);
+        this.state.tipPercentage = value;
+        this.setState(this.state);
+        this.calculateTip(this.state.amountTotal);
+    }
+    
     render() {
         return (
           <View style={styles.container}>
@@ -53,8 +60,11 @@ export default class tipCalculator extends Component {
                 </TextInput>
             </View>
             
-            <TipSelector style={styles.row} />
-            
+            <TipSelector
+              style={styles.row} 
+              selectionChanged={this.updateTipPercentage.bind(this)}
+            />
+
             <View style={styles.row}>
                 <Text style={styles.label}>
                     Split Amongst {this.state.split}:
@@ -68,7 +78,7 @@ export default class tipCalculator extends Component {
                     onValueChange={this.splitBill.bind(this)}
                 />
             </View>
-            
+
             <View style={styles.row}>
                 <Text style={styles.label}>
                     Amount Per Person:
@@ -77,7 +87,7 @@ export default class tipCalculator extends Component {
                     ${this.state.amountPerPerson}
                 </Text>
             </View>
-            
+
             <View style={styles.row}>
                 <Text style={styles.label}>
                     Total Tip:
@@ -107,7 +117,7 @@ const styles = StyleSheet.create({
       textInput: {
         textAlign: 'left',
         color: '#333333',
-        margin: 5,
+        margin: 10,
         height: 50,
         borderColor: '#60b7e2',
         borderWidth: 1,
@@ -119,7 +129,7 @@ const styles = StyleSheet.create({
         flex: 2
       },
       slider: {
-        margin: 5,
+        margin: 10,
         height: 40,
         flex: 2
     },
