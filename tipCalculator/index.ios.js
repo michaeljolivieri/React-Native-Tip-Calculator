@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
       textInput: {
         textAlign: 'left',
         color: '#333333',
+        padding: 10,
         margin: 10,
         height: 50,
         borderColor: '#60b7e2',
